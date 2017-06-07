@@ -1,0 +1,26 @@
+# ~/.config/nvim/rc/dein.toml
+
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+
+# colorscheme
+[[plugins]]
+repo = 'altercation/vim-colors-solarized'
+
+# typescript
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+
+# ocaml
+[[plugins]]
+repo = 'def-lkb/ocp-indent-vim'
+
+# coq
+[[plugins]]
+repo = 'jvoorhis/coq.vim'

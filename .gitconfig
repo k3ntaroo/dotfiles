@@ -1,0 +1,9 @@
+[user]
+    name = Kentaro Takakuwa
+    email = kentaro.tkkw@gmail.com
+[core]
+    excludesfile = ~/.gitignore_global
+[alias]
+    st = status --short --branch
+    l = log --graph --decorate
+    la = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset)%C(bold yellow)%d%C(reset)%n''  %s - %an' --all
