@@ -1,6 +1,6 @@
 # .zshrc
 
-### BEGIN zsh confs
+# zsh confs
 
 ## enable better auto-completion
 autoload -U compinit
@@ -16,59 +16,68 @@ precmd () { vcs_info }
 PROMPT="%F{cyan}%n @ %/ \$vcs_info_msg_0_
 %F{cyan}λ>%f "
 
-### END zsh confs
-
 ## history
-
 setopt hist_ignore_dups
 setopt hist_no_store
 export HISTFILE=${HOME}/.zsh_history
 export HISTSIZE=1000
 export SAVEHIST=100000
 
-## xdg base directory
+
+# xdg base directory
 export XDG_CONFIG_HOME=$HOME/.config
 
-## use 256color
+# use 256color
 export TERM=xterm-256color
 
-## EDITOR
-if which nvim > /dev/null
-then
+# EDITOR
+if which nvim > /dev/null; then
   export EDITOR=`which nvim`
 else
   export EDITOR=`which vi`
 fi
 
-## copy function
-copy () {
-  cat $1 | pbcopy
-}
+# golang
+if which go > /dev/null; then
+    export GOROOT=`go env GOROOT`
+    export GOPATH=$HOME/go
+    export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+fi
 
+# rbenv
+if which rbenv > /dev/null; then
+    eval "$(rbenv init -)"
+fi
 
-## golang
-export GOROOT=`go env GOROOT`
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
-## rbenv
-eval "$(rbenv init -)"
-
-## use emacs bindings in prompt
+# use emacs bindings in prompt
 set -o emacs
 
-## OPAM configuration
-. ${HOME}/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+# OPAM configuration
+if which opam > /dev/null; then
+    . ${HOME}/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+fi
 
-## PATH
+# PATH
 export PATH=${HOME}/.local/bin:${PATH}
 
-## aliases
+# aliases
 alias clang++='clang++ -O2 -std=c++14 -Wall -o z.out'
 alias coqtop='rlwrap coqtop'
 alias ghc='stack ghc --'
 alias ghci='stack ghci --'
 alias gosh='rlwrap gosh'
-alias ls='ls -FG'
 alias ocaml='rlwrap ocaml'
 alias sml='rlwrap sml'
+
+# macos
+if [ `uname` = 'Darwin' ]; then
+    ## copy function
+    if which pbcopy > /dev/null; then
+        copy () {
+          cat $1 | pbcopy
+        }
+    fi
+
+    ## BSD ls
+    alias ls='ls -FG'
+fi
