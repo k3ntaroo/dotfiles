@@ -13,8 +13,8 @@ zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' formats "%F{yellow}[%b]%f"
 precmd () { vcs_info }
 
-PROMPT="%F{cyan}%n @ %/ \$vcs_info_msg_0_
-%F{cyan}λ>%f "
+PROMPT="%F{cyan}%n @ %~ \$vcs_info_msg_0_
+%F{cyan}λ%f "
 
 ## history
 setopt hist_ignore_dups
@@ -23,9 +23,8 @@ export HISTFILE=${HOME}/.zsh_history
 export HISTSIZE=1000
 export SAVEHIST=100000
 
-
 # xdg base directory
-export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CONFIG_HOME=${HOME}/.config
 
 # use 256color
 export TERM=xterm-256color
@@ -37,11 +36,14 @@ else
   export EDITOR=`which vi`
 fi
 
+# PATH
+export PATH=${HOME}/.local/bin:${PATH}
+
 # golang
 if which go > /dev/null; then
     export GOROOT=`go env GOROOT`
-    export GOPATH=$HOME/go
-    export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+    export GOPATH=${HOME}/go
+    export PATH=${PATH}:${GOROOT}/bin:${GOPATH}/bin
 fi
 
 # rbenv
@@ -49,16 +51,19 @@ if which rbenv > /dev/null; then
     eval "$(rbenv init -)"
 fi
 
-# use emacs bindings in prompt
-set -o emacs
+# [perl] plenv
+if which plenv > /dev/null; then eval "$(plenv init - zsh)"; fi
+
+# [python] pyenv
+if which pyenv > /dev/null; then
+    export PATH="${HOME}/.pyenv/bin:${PATH}"
+    eval "$(pyenv init -)"
+fi
 
 # OPAM configuration
 if which opam > /dev/null; then
     . ${HOME}/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 fi
-
-# PATH
-export PATH=${HOME}/.local/bin:${PATH}
 
 # aliases
 alias clang++='clang++ -O2 -std=c++14 -Wall -o z.out'
@@ -68,6 +73,9 @@ alias ghci='stack ghci --'
 alias gosh='rlwrap gosh'
 alias ocaml='rlwrap ocaml'
 alias sml='rlwrap sml'
+
+# use emacs bindings in prompt
+set -o emacs
 
 # macos
 if [ `uname` = 'Darwin' ]; then

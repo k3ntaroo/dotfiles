@@ -4,23 +4,22 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'Shougo/denite.nvim'
-
-[[plugins]]
 repo = 'itchyny/lightline.vim'
 
-# colorscheme
 [[plugins]]
-repo = 'altercation/vim-colors-solarized'
+repo = 'w0ng/vim-hybrid'
 
-# typescript
+[[plugins]]
+repo = 'cocopon/lightline-hybrid.vim'
+
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
 
-# ocaml
 [[plugins]]
 repo = 'def-lkb/ocp-indent-vim'
 
-# coq
 [[plugins]]
 repo = 'jvoorhis/coq.vim'
+
+[[plugins]]
+repo = 'vim-perl/vim-perl'

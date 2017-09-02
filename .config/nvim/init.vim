@@ -3,12 +3,11 @@
 set ruler
 set autoindent
 set nohlsearch
-
+set number
 set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-
 set hidden
 
 set backspace=start,indent,eol
@@ -32,8 +31,8 @@ endif
 if dein#load_state(s:dein_dir)
     call dein#begin(s:dein_dir)
 
-    let s:toml = g:rc_dir . '/dein.toml'
-    call dein#load_toml(s:toml, {'lazy': 0})
+    let s:toml_file = g:rc_dir . '/dein.toml'
+    call dein#load_toml(s:toml_file, {'lazy': 0})
 
     call dein#end()
     call dein#save_state()
@@ -44,36 +43,27 @@ if dein#check_install()
 endif
 " END dein.vim preferences
 
-" solarized
-syntax enable
-set background=light
-colorscheme solarized
-let g:lightline = {
-            \ 'colorscheme': 'solarized',
-            \ }
+syntax on
+set background=dark
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1
+colorscheme hybrid
 
 " netrw
-nnoremap <silent>\x :<C-u>Explore<CR>
-let g:netrw_liststyle = 3
-let g:netrw_banner = 0 " disable the directory banner
-let g:netrw_bufsettings = 'noma nomod number nobl nowrap ro'
-let g:netrw_list_hide= '.DS_Store$,.*\.aux$,.*\.dvi$,.*\.fdb_latexmk,.*\.fls$,.*\.synctex\.gz$,.*\.swp$,.*\.toc$'
+nn <space>x :<C-u>Explore<CR>
+let g:netrw_liststyle=3
+let g:netrw_banner=0 " disable the directory banner
+let g:netrw_bufsettings='noma nomod number nobl nowrap ro'
+let g:netrw_list_hide='.DS_Store$,.*\.aux$,.*\.dvi$,.*\.fdb_latexmk,.*\.fls$,.*\.synctex\.gz$,.*\.swp$,.*\.toc$'
 
-" denite.nvim
-if dein#tap('denite.nvim')
-    nnoremap <silent>\f :<C-u>DeniteProjectDir file_rec<CR>
-    nnoremap <silent>\b :<C-u>Denite buffer<CR>
-    call denite#custom#source('buffer', 'matchers', ['matcher_fuzzy'])
-    call denite#custom#source('file_rec', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
-    call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
-                \ [ '*~', '*.o', '*.exe', '*.bak',
-                \   '.DS_Store', '*.pyc', '*.sw[po]', '*.class',
-                \   'tags', 'tags-*',
-                \   'target/',
-                \   'node_modules/',
-                \   '.*/' ])
-endif
+nn <CR> :<C-u>w<CR>
+nn g[ :<C-u>tabprevious<CR>
+nn g] :<C-u>tabnext<CR>
+nn g- :<C-u>tabm -1<CR>
+nn g= :<C-u>tabm +1<CR>
 
-nnoremap <silent>\t :<C-u>tabnew<CR>
-nnoremap <silent>\d :<C-u>b#\|bd #<CR>
-nnoremap <silent><C-z> <Nop>
+nn <space>t :<C-u>tabnew<CR>
+nn <space>T :<C-u>tabnew<CR>:<C-u>Explore<CR>
+nn <space>d :<C-u>b#\|bd #<CR>
+nn <space>r :source $HOME/.config/nvim/init.vim<CR>
+nn <C-z> <Nop>
