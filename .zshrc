@@ -23,6 +23,9 @@ export HISTFILE=${HOME}/.zsh_history
 export HISTSIZE=1000
 export SAVEHIST=100000
 
+## set word characters
+export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
+
 # xdg base directory
 export XDG_CONFIG_HOME=${HOME}/.config
 
