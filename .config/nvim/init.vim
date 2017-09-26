@@ -2,19 +2,22 @@
 
 set ruler
 set autoindent
-set nohlsearch
 set number
+set nowrap
+set nohlsearch
 set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set hidden
+set ambiwidth=double
 
 set backspace=start,indent,eol
 
 filetype plugin indent on
 
-" BEGIN dein.vim preferences
+" dein.vim preferences
+" {{{
 let s:nvim_rc_path = $XDG_CONFIG_HOME . '/nvim/rc'
 let g:rc_dir = expand(s:nvim_rc_path)
 
@@ -41,7 +44,7 @@ endif
 if dein#check_install()
     call dein#install()
 endif
-" END dein.vim preferences
+" }}}
 
 syntax on
 set background=dark
@@ -50,20 +53,21 @@ let g:hybrid_reduced_contrast = 1
 colorscheme hybrid
 
 " netrw
-nn <space>x :<C-u>Explore<CR>
+nnoremap <leader>x :<C-u>Explore<CR>
+nnoremap <leader>q :q<CR>
 let g:netrw_liststyle=3
 let g:netrw_banner=0 " disable the directory banner
 let g:netrw_bufsettings='noma nomod number nobl nowrap ro'
 let g:netrw_list_hide='.DS_Store$,.*\.aux$,.*\.dvi$,.*\.fdb_latexmk,.*\.fls$,.*\.synctex\.gz$,.*\.swp$,.*\.toc$'
 
-nn <CR> :<C-u>w<CR>
-nn g[ :<C-u>tabprevious<CR>
-nn g] :<C-u>tabnext<CR>
-nn g- :<C-u>tabm -1<CR>
-nn g= :<C-u>tabm +1<CR>
+nnoremap <CR> :<C-u>w<CR>
+nnoremap g[ :<C-u>tabprevious<CR>
+nnoremap g] :<C-u>tabnext<CR>
+nnoremap g- :<C-u>tabm -1<CR>
+nnoremap g= :<C-u>tabm +1<CR>
 
-nn <space>t :<C-u>tabnew<CR>
-nn <space>T :<C-u>tabnew<CR>:<C-u>Explore<CR>
-nn <space>d :<C-u>b#\|bd #<CR>
-nn <space>r :source $HOME/.config/nvim/init.vim<CR>
-nn <C-z> <Nop>
+nnoremap <leader>t :<C-u>tabnew<CR>
+nnoremap <leader>T :<C-u>tabnew<CR>:<C-u>Explore<CR>
+nnoremap <leader>d :<C-u>b#\|bd #<CR>
+nnoremap <leader>r :source $MYVIMRC<CR>
+nnoremap <C-z> <Nop>

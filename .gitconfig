@@ -2,6 +2,7 @@
     name = Kentaro Takakuwa
     email = kentaro.tkkw@gmail.com
 [core]
+    pager = less -x1,5
     excludesfile = ~/.gitignore_global
 [alias]
     st = status --short --branch

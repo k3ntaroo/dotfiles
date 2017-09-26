@@ -59,7 +59,6 @@ if which plenv > /dev/null; then eval "$(plenv init - zsh)"; fi
 
 # [python] pyenv
 if which pyenv > /dev/null; then
-    export PATH="${HOME}/.pyenv/bin:${PATH}"
     eval "$(pyenv init -)"
 fi
 
@@ -71,11 +70,13 @@ fi
 # aliases
 alias clang++='clang++ -O2 -std=c++14 -Wall -o z.out'
 alias coqtop='rlwrap coqtop'
+alias g++='g++-7 -std=c++14 -Wall'
 alias ghc='stack ghc --'
 alias ghci='stack ghci --'
 alias gosh='rlwrap gosh'
 alias ocaml='rlwrap ocaml'
 alias sml='rlwrap sml'
+alias sr='screenresolution'
 
 # use emacs bindings in prompt
 set -o emacs
@@ -92,3 +93,11 @@ if [ `uname` = 'Darwin' ]; then
     ## BSD ls
     alias ls='ls -FG'
 fi
+
+function timer() {
+    echo 0
+    for i in `seq $1`; do
+        sleep 1
+        echo $i
+    done
+}
