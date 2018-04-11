@@ -7,16 +7,16 @@ repo = 'Shougo/dein.vim'
 repo = 'itchyny/lightline.vim'
 
 [[plugins]]
-repo = 'w0ng/vim-hybrid'
+repo = 'cocopon/lightline-hybrid.vim'
 
 [[plugins]]
-repo = 'cocopon/lightline-hybrid.vim'
+repo = 'w0ng/vim-hybrid'
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
 
 [[plugins]]
-repo = 'def-lkb/ocp-indent-vim'
+repo = 'reasonml-editor/vim-reason-plus'
 
 [[plugins]]
 repo = 'jvoorhis/coq.vim'

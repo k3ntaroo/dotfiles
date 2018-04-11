@@ -1,4 +1,15 @@
 # .zshrc
+#
+append_PATH() { if ! [[ "$PATH" =~ (^|:)${1}($|:) ]]; then
+        export PATH=${PATH}:${1}
+    fi
+}
+
+prepend_PATH() {
+    if ! [[ "$PATH" =~ (^|:)${1}($|:) ]]; then
+        export PATH=${1}:${PATH}
+    fi
+}
 
 # zsh confs
 
@@ -23,30 +34,24 @@ export HISTFILE=${HOME}/.zsh_history
 export HISTSIZE=1000
 export SAVEHIST=100000
 
-## set word characters
-export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
-
-# xdg base directory
-export XDG_CONFIG_HOME=${HOME}/.config
-
-# use 256color
-export TERM=xterm-256color
+export LANG=en_US.utf8
+export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>' # word characters
+export XDG_CONFIG_HOME=${HOME}/.config    # base directory
+export TERM=xterm-256color                # use 256color
+export PATH=${HOME}/.local/bin:${PATH}    # PATH
+export LESSCHARSET=utf-8                  # apply utf-8 to less command
 
 # EDITOR
 if which nvim > /dev/null; then
-  export EDITOR=`which nvim`
+    export EDITOR=`which nvim`
 else
-  export EDITOR=`which vi`
+    export EDITOR=`which vi`
 fi
-
-# PATH
-export PATH=${HOME}/.local/bin:${PATH}
 
 # golang
 if which go > /dev/null; then
-    export GOROOT=`go env GOROOT`
     export GOPATH=${HOME}/go
-    export PATH=${PATH}:${GOROOT}/bin:${GOPATH}/bin
+    append_PATH ${GOPATH}/bin
 fi
 
 # rbenv
@@ -55,33 +60,41 @@ if which rbenv > /dev/null; then
 fi
 
 # [perl] plenv
-if which plenv > /dev/null; then eval "$(plenv init - zsh)"; fi
+if which plenv > /dev/null; then
+    eval "$(plenv init - zsh)";
+fi
 
 # [python] pyenv
 if which pyenv > /dev/null; then
     eval "$(pyenv init -)"
 fi
 
-# OPAM configuration
+# ocaml
+
+## OPAM configuration
 if which opam > /dev/null; then
     . ${HOME}/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+    eval `opam config env`
 fi
 
+# LLVM (installed by Homebrew)
+prepend_PATH '/usr/local/opt/llvm/bin'
+
 # aliases
-alias clang++='clang++ -O2 -std=c++14 -Wall -o z.out'
-alias coqtop='rlwrap coqtop'
+alias clang++='clang++ --std=c++14 -Wall -o z.out'
+alias emacs='emacs -nw'
 alias g++='g++-7 -std=c++14 -Wall'
 alias ghc='stack ghc --'
 alias ghci='stack ghci --'
 alias gosh='rlwrap gosh'
-alias ocaml='rlwrap ocaml'
-alias sml='rlwrap sml'
 alias sr='screenresolution'
+alias ocaml='rlwrap ocaml'
+alias sbcl='rlwrap sbcl'
 
 # use emacs bindings in prompt
 set -o emacs
 
-# macos
+# macOS
 if [ `uname` = 'Darwin' ]; then
     ## copy function
     if which pbcopy > /dev/null; then
@@ -93,11 +106,3 @@ if [ `uname` = 'Darwin' ]; then
     ## BSD ls
     alias ls='ls -FG'
 fi
-
-function timer() {
-    echo 0
-    for i in `seq $1`; do
-        sleep 1
-        echo $i
-    done
-}
