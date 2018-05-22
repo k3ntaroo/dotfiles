@@ -16,10 +16,6 @@ precmd () { vcs_info }
 PROMPT="%F{cyan}%~ \$vcs_info_msg_0_
 %F{cyan}λ%f "
 
-function cdd () {
-    mkdir -p -- "$1" && cd -- "$1"
-}
-
 ## history
 setopt hist_ignore_dups
 setopt hist_no_store
