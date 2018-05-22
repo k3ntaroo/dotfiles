@@ -1,15 +1,4 @@
 # .zshrc
-#
-append_PATH() { if ! [[ "$PATH" =~ (^|:)${1}($|:) ]]; then
-        export PATH=${PATH}:${1}
-    fi
-}
-
-prepend_PATH() {
-    if ! [[ "$PATH" =~ (^|:)${1}($|:) ]]; then
-        export PATH=${1}:${PATH}
-    fi
-}
 
 # zsh confs
 
@@ -24,8 +13,12 @@ zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' formats "%F{yellow}[%b]%f"
 precmd () { vcs_info }
 
-PROMPT="%F{cyan}%n @ %~ \$vcs_info_msg_0_
+PROMPT="%F{cyan}%~ \$vcs_info_msg_0_
 %F{cyan}λ%f "
+
+function cdd () {
+    mkdir -p -- "$1" && cd -- "$1"
+}
 
 ## history
 setopt hist_ignore_dups
@@ -40,6 +33,20 @@ export XDG_CONFIG_HOME=${HOME}/.config    # base directory
 export TERM=xterm-256color                # use 256color
 export PATH=${HOME}/.local/bin:${PATH}    # PATH
 export LESSCHARSET=utf-8                  # apply utf-8 to less command
+
+# path
+append_PATH() {
+    if ! [[ "$PATH" =~ (^|:)${1}($|:) ]]; then
+        export PATH=${PATH}:${1}
+    fi
+}
+
+prepend_PATH() {
+    if ! [[ "$PATH" =~ (^|:)${1}($|:) ]]; then
+        export PATH=${1}:${PATH}
+    fi
+}
+
 
 # EDITOR
 if which nvim > /dev/null; then
@@ -80,17 +87,6 @@ fi
 # LLVM (installed by Homebrew)
 prepend_PATH '/usr/local/opt/llvm/bin'
 
-# aliases
-alias clang++='clang++ --std=c++14 -Wall -o z.out'
-alias emacs='emacs -nw'
-alias g++='g++-7 -std=c++14 -Wall'
-alias ghc='stack ghc --'
-alias ghci='stack ghci --'
-alias gosh='rlwrap gosh'
-alias sr='screenresolution'
-alias ocaml='rlwrap ocaml'
-alias sbcl='rlwrap sbcl'
-
 # use emacs bindings in prompt
 set -o emacs
 
@@ -106,3 +102,19 @@ if [ `uname` = 'Darwin' ]; then
     ## BSD ls
     alias ls='ls -FG'
 fi
+
+# helpful functions
+#
+function cdd () {
+    mkdir -p -- "$1" && cd -- "$1"
+}
+
+# aliases
+alias clang++='clang++ --std=c++14 -Wall -o z.out'
+alias g++='g++-7 -std=c++14 -Wall'
+alias ghc='stack ghc --'
+alias ghci='stack ghci --'
+alias gosh='rlwrap gosh'
+alias sr='screenresolution'
+alias ocaml='rlwrap ocaml'
+alias sbcl='rlwrap sbcl'

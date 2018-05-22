@@ -1,5 +1,7 @@
 # ~/.config/nvim/rc/dein.toml
 
+# basis
+
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
@@ -9,8 +11,15 @@ repo = 'itchyny/lightline.vim'
 [[plugins]]
 repo = 'cocopon/lightline-hybrid.vim'
 
+# colorscheme
+
 [[plugins]]
 repo = 'w0ng/vim-hybrid'
+
+[[plugins]]
+repo = 'reedes/vim-colors-pencil'
+
+# specific language supports
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
