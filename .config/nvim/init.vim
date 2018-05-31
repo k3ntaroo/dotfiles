@@ -38,18 +38,27 @@ set ruler
 set autoindent
 set number
 set nowrap
+set hidden
 set expandtab
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
-set hidden
 set ambiwidth=double
 set foldmethod=marker
 set backspace=start,indent,eol
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" general
+set wildignore+=*.DS_Store,*.exe,*.o,*.out,*.pdf,*.swp
+" latex
+set wildignore+=*.aux,*.dvi,*.toc,*.synctex,*.gz
+" ocaml
+set wildignore+=*.cm?,*.annot
+" haskell
+set wildignore+=*.hi
+
+"-----------------------------------------------------------
 " colorscheme
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"-----------------------------------------------------------
 
 syntax on
 set background=light
@@ -63,9 +72,9 @@ colorscheme pencil
 highlight ExtraWhitespace ctermbg=cyan
 match ExtraWhitespace /\s\+$/
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"-----------------------------------------------------------
 " netrw
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"-----------------------------------------------------------
 
 let g:netrw_liststyle=3
 let g:netrw_banner=0 " disable the directory banner
@@ -74,21 +83,24 @@ let g:netrw_list_hide = '\.DS_Store$,.*\.swp$,.*\.o$,'
 " latex
 let g:netrw_list_hide .= '.*\.aux$,.*\.dvi$,.*\.toc$,.*\.synctex\.gz$,'
 " ocaml
-let g:netrw_list_hide .= '.*\.cm[aiox]$,'
+let g:netrw_list_hide .= '.*\.cm[aiox]$,.*\.annot$,'
 " haskell
 let g:netrw_list_hide .= '.*\.hi$,'
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"-----------------------------------------------------------
 " lightline
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"-----------------------------------------------------------
 
 let g:lightline = {
   \ 'colorscheme': 'PaperColor_light',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ],
+  \ },
   \ }
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" key bings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"-----------------------------------------------------------
+" key bindings
+"-----------------------------------------------------------
 
 nnoremap zq :<C-u>q<CR>
 nnoremap <CR> :<C-u>w<CR>
@@ -101,6 +113,7 @@ nnoremap <Esc> :nohl<CR>
 
 nnoremap <Leader>x :<C-u>Explore<CR>
 nnoremap <Leader>q :q<CR>
+nnoremap <Leader>D :bd<CR>
 nnoremap <Leader>T :<C-u>tabnew<CR>
-nnoremap <Leader>d :<C-u>b#\|bd #<CR>
 nnoremap <Leader>r :source $MYVIMRC<CR>
+nnoremap <Space>b :ls<CR>
