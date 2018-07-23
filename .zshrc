@@ -1,5 +1,4 @@
 # .zshrc
-
 # zsh confs
 
 ## enable better auto-completion
@@ -24,7 +23,7 @@ export HISTSIZE=1000
 export SAVEHIST=100000
 
 export LANG=en_US.utf8
-export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>' # word characters
+export WORDCHARS='*?_.[]~-=&;!#$%^(){}|<>' # word characters
 export XDG_CONFIG_HOME=${HOME}/.config    # base directory
 export TERM=xterm-256color                # use 256color
 export PATH=${HOME}/.local/bin:${PATH}    # PATH
