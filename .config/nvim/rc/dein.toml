@@ -11,6 +11,9 @@ repo = 'itchyny/lightline.vim'
 [[plugins]]
 repo = 'cocopon/lightline-hybrid.vim'
 
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
 # colorscheme
 
 [[plugins]]

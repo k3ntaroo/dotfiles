@@ -99,6 +99,15 @@ let g:lightline = {
   \ }
 
 "-----------------------------------------------------------
+" nerdtree
+"-----------------------------------------------------------
+
+let NERDTreeIgnore = [
+      \ '\.o',
+      \ '\.cm[aiox]$',
+      \ ]
+
+"-----------------------------------------------------------
 " key bindings
 "-----------------------------------------------------------
 
@@ -111,7 +120,7 @@ nnoremap g- :<C-u>tabm -1<CR>
 nnoremap g= :<C-u>tabm +1<CR>
 nnoremap <Esc> :nohl<CR>
 
-nnoremap <Leader>x :<C-u>Explore<CR>
+nnoremap <Leader>x :<C-u>NERDTreeToggle<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>D :bd<CR>
 nnoremap <Leader>T :<C-u>tabnew<CR>
