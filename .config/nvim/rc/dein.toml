@@ -22,6 +22,9 @@ repo = 'w0ng/vim-hybrid'
 [[plugins]]
 repo = 'reedes/vim-colors-pencil'
 
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
 # specific language supports
 
 [[plugins]]

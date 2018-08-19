@@ -62,12 +62,9 @@ set wildignore+=*.hi
 
 syntax on
 set background=light
+set background=dark
 
 colorscheme pencil
-
-" colorscheme hybrid
-" let g:hybrid_custom_term_colors = 1
-" let g:hybrid_reduced_contrast = 1
 
 highlight ExtraWhitespace ctermbg=cyan
 match ExtraWhitespace /\s\+$/
@@ -92,7 +89,7 @@ let g:netrw_list_hide .= '.*\.hi$,'
 "-----------------------------------------------------------
 
 let g:lightline = {
-  \ 'colorscheme': 'PaperColor_light',
+  \ 'colorscheme': 'PaperColor_dark',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ],
   \ },
@@ -106,6 +103,7 @@ let NERDTreeIgnore = [
       \ '\.o',
       \ '\.cm[aiox]$',
       \ ]
+let g:NERDTreeBookmarksFile = $XDG_DATA_HOME . '/nerdtree/bookmarks'
 
 "-----------------------------------------------------------
 " key bindings
@@ -114,6 +112,7 @@ let NERDTreeIgnore = [
 nnoremap zq :<C-u>q<CR>
 nnoremap <CR> :<C-u>w<CR>
 nnoremap <C-z> <Nop>
+nnoremap g0 1gt
 nnoremap g[ :<C-u>tabprevious<CR>
 nnoremap g] :<C-u>tabnext<CR>
 nnoremap g- :<C-u>tabm -1<CR>
