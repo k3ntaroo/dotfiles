@@ -3,7 +3,7 @@
     email = kentaro.tkkw@gmail.com
 [core]
     pager = less -x1,5
-    excludesfile = ~/.gitignore_global
+    excludesfile = ~/.config/git/ignore
 [alias]
     st = status --short --branch
     l = log --graph --decorate --all
