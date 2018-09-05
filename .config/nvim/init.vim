@@ -61,10 +61,10 @@ set wildignore+=*.hi
 "-----------------------------------------------------------
 
 syntax on
-set background=light
-set background=dark
 
 colorscheme pencil
+highlight! Normal ctermbg=NONE
+highlight! Normal ctermfg=NONE
 
 highlight ExtraWhitespace ctermbg=cyan
 match ExtraWhitespace /\s\+$/
@@ -89,7 +89,7 @@ let g:netrw_list_hide .= '.*\.hi$,'
 "-----------------------------------------------------------
 
 let g:lightline = {
-  \ 'colorscheme': 'PaperColor_dark',
+  \ 'colorscheme': 'PaperColor_light',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ],
   \ },
@@ -124,4 +124,5 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>D :bd<CR>
 nnoremap <Leader>T :<C-u>tabnew<CR>
 nnoremap <Leader>r :source $MYVIMRC<CR>
+nnoremap <Leader>E :tabe $MYVIMRC<CR>
 nnoremap <Space>b :ls<CR>

@@ -62,7 +62,7 @@ set-window-option -g window-status-activity-fg white
 set-window-option -g window-status-activity-attr bright
 
 # mode
-set-window-option -g mode-fg cyan
+set-window-option -g mode-bg blue
 
 # pane borders
 set -g pane-border-fg white
