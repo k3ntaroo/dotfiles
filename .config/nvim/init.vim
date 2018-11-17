@@ -30,14 +30,16 @@ if dein#check_install()
 endif
 " }}}
 
+"-----------------------------------------------------------
 " basis
+"-----------------------------------------------------------
 
 filetype plugin indent on
 
 set ruler
 set autoindent
 set number
-set nowrap
+set wrap
 set hidden
 set expandtab
 set tabstop=2
@@ -46,7 +48,7 @@ set shiftwidth=2
 set ambiwidth=double
 set foldmethod=marker
 set backspace=start,indent,eol
-
+set incsearch
 " general
 set wildignore+=*.DS_Store,*.exe,*.o,*.out,*.pdf,*.swp
 " latex
@@ -70,21 +72,6 @@ highlight ExtraWhitespace ctermbg=cyan
 match ExtraWhitespace /\s\+$/
 
 "-----------------------------------------------------------
-" netrw
-"-----------------------------------------------------------
-
-let g:netrw_liststyle=3
-let g:netrw_banner=0 " disable the directory banner
-let g:netrw_bufsettings='noma nomod number nobl nowrap ro'
-let g:netrw_list_hide = '\.DS_Store$,.*\.swp$,.*\.o$,'
-" latex
-let g:netrw_list_hide .= '.*\.aux$,.*\.dvi$,.*\.toc$,.*\.synctex\.gz$,'
-" ocaml
-let g:netrw_list_hide .= '.*\.cm[aiox]$,.*\.annot$,'
-" haskell
-let g:netrw_list_hide .= '.*\.hi$,'
-
-"-----------------------------------------------------------
 " lightline
 "-----------------------------------------------------------
 
@@ -100,7 +87,7 @@ let g:lightline = {
 "-----------------------------------------------------------
 
 let NERDTreeIgnore = [
-      \ '\.o',
+      \ '\.o$',
       \ '\.cm[aiox]$',
       \ ]
 let g:NERDTreeBookmarksFile = $XDG_DATA_HOME . '/nerdtree/bookmarks'

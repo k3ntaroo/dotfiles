@@ -9,21 +9,15 @@ repo = 'Shougo/dein.vim'
 repo = 'itchyny/lightline.vim'
 
 [[plugins]]
-repo = 'cocopon/lightline-hybrid.vim'
-
-[[plugins]]
 repo = 'scrooloose/nerdtree'
-
-# colorscheme
-
-[[plugins]]
-repo = 'w0ng/vim-hybrid'
-
-[[plugins]]
-repo = 'reedes/vim-colors-pencil'
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+
+# colorscheme
+ 
+[[plugins]]
+repo = 'reedes/vim-colors-pencil'
 
 # specific language supports
 
@@ -31,10 +25,4 @@ repo = 'tpope/vim-fugitive'
 repo = 'leafgarland/typescript-vim'
 
 [[plugins]]
-repo = 'reasonml-editor/vim-reason-plus'
-
-[[plugins]]
 repo = 'jvoorhis/coq.vim'
-
-[[plugins]]
-repo = 'vim-perl/vim-perl'

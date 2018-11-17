@@ -9,8 +9,11 @@ export XDG_DATA_HOME="${HOME}/.local/share"
 set -o emacs
 export LANG=en_US.utf8
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}|<>'
-export TERM=xterm-256color
 export PATH=${HOME}/.local/bin:${PATH}
+
+setopt auto_pushd
+setopt pushd_ignore_dups
+zstyle ':completion:*:default' menu select=1
 
 # enable better auto-completion
 autoload -U compinit
@@ -96,8 +99,8 @@ export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 # [ocaml] opam
 export OPAMROOT="${XDG_DATA_HOME}/opam"
 if which opam > /dev/null; then
-    . ${OPAMROOT}/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-    eval `opam config env`
+    . ${OPAMROOT}/opam-init/init.zsh > /dev/null 2> /dev/null || true
+    eval `opam env`
 fi
 
 # [haskell] stack

@@ -8,6 +8,8 @@
     st = status --short --branch
     l = log --graph --decorate --all
     la = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset)%C(bold yellow)%d%C(reset)%n''  %s - %an' --all
+    d = diff
+    dd = diff --cached
 [diff]
     tool = nvimdiff
 [difftool]
