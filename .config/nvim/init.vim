@@ -68,7 +68,7 @@ colorscheme pencil
 highlight! Normal ctermbg=NONE
 highlight! Normal ctermfg=NONE
 
-highlight ExtraWhitespace ctermbg=cyan
+highlight ExtraWhitespace ctermbg=magenta
 match ExtraWhitespace /\s\+$/
 
 "-----------------------------------------------------------
@@ -83,14 +83,10 @@ let g:lightline = {
   \ }
 
 "-----------------------------------------------------------
-" nerdtree
+" netrw
 "-----------------------------------------------------------
 
-let NERDTreeIgnore = [
-      \ '\.o$',
-      \ '\.cm[aiox]$',
-      \ ]
-let g:NERDTreeBookmarksFile = $XDG_DATA_HOME . '/nerdtree/bookmarks'
+let g:netrw_liststyle = 3
 
 "-----------------------------------------------------------
 " key bindings
@@ -99,17 +95,15 @@ let g:NERDTreeBookmarksFile = $XDG_DATA_HOME . '/nerdtree/bookmarks'
 nnoremap zq :<C-u>q<CR>
 nnoremap <CR> :<C-u>w<CR>
 nnoremap <C-z> <Nop>
-nnoremap g0 1gt
 nnoremap g[ :<C-u>tabprevious<CR>
 nnoremap g] :<C-u>tabnext<CR>
 nnoremap g- :<C-u>tabm -1<CR>
 nnoremap g= :<C-u>tabm +1<CR>
 nnoremap <Esc> :nohl<CR>
 
-nnoremap <Leader>x :<C-u>NERDTreeToggle<CR>
-nnoremap <Leader>q :q<CR>
+nnoremap <Leader>x :e .<CR>
 nnoremap <Leader>D :bd<CR>
 nnoremap <Leader>T :<C-u>tabnew<CR>
 nnoremap <Leader>r :source $MYVIMRC<CR>
 nnoremap <Leader>E :tabe $MYVIMRC<CR>
-nnoremap <Space>b :ls<CR>
+nnoremap <Space>b :BufExplorer<CR>

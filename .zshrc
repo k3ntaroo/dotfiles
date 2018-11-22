@@ -1,4 +1,16 @@
-# .zshrc
+
+# path
+append_PATH() {
+    if ! [[ "$PATH" =~ (^|:)${1}($|:) ]]; then
+        export PATH=${PATH}:${1}
+    fi
+}
+
+prepend_PATH() {
+    if ! [[ "$PATH" =~ (^|:)${1}($|:) ]]; then
+        export PATH=${1}:${PATH}
+    fi
+}
 
 ## XDG Base Directory Specification
 export XDG_CONFIG_HOME="${HOME}/.config"
@@ -7,9 +19,13 @@ export XDG_DATA_HOME="${HOME}/.local/share"
 
 # general
 set -o emacs
-export LANG=en_US.utf8
+set -g default-terminal tmux-256color
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export TERM=tmux-256color
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}|<>'
-export PATH=${HOME}/.local/bin:${PATH}
+prepend_PATH "${HOME}/.local/bin"
+prepend_PATH "/usr/local/bin"
 
 setopt auto_pushd
 setopt pushd_ignore_dups
@@ -39,19 +55,6 @@ export SAVEHIST=1000
 # less
 export LESSCHARSET=utf-8
 export LESSHISTFILE=-
-
-# path
-append_PATH() {
-    if ! [[ "$PATH" =~ (^|:)${1}($|:) ]]; then
-        export PATH=${PATH}:${1}
-    fi
-}
-
-prepend_PATH() {
-    if ! [[ "$PATH" =~ (^|:)${1}($|:) ]]; then
-        export PATH=${1}:${PATH}
-    fi
-}
 
 # EDITOR
 if which nvim > /dev/null; then
@@ -111,6 +114,7 @@ export CARGO_HOME="${XDG_DATA_HOME}"/cargo
 
 # macOS
 if [ `uname` = 'Darwin' ]; then
+    export __CF_USER_TEXT_ENCODING="0x$(printf %x $(id -u)):0x8000100:14"
     ## copy function
     if which pbcopy > /dev/null; then
         copy () {
@@ -119,7 +123,7 @@ if [ `uname` = 'Darwin' ]; then
     fi
 
     ## BSD ls
-    alias ls='ls -FG'
+    alias ls="LANG='ja_JP.UTF-8' ls -FG"
 
     alias sr='screenresolution'
     alias g++='g++-7 -std=c++14 -Wall'
