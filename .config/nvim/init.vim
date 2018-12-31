@@ -52,7 +52,7 @@ set incsearch
 " general
 set wildignore+=*.DS_Store,*.exe,*.o,*.out,*.pdf,*.swp
 " latex
-set wildignore+=*.aux,*.dvi,*.toc,*.synctex,*.gz
+set wildignore+=*.aux,*.dvi,*.fdb_latexmk,*.fls,*.synctex.gz
 " ocaml
 set wildignore+=*.cm?,*.annot
 " haskell
@@ -76,23 +76,27 @@ match ExtraWhitespace /\s\+$/
 "-----------------------------------------------------------
 
 let g:lightline = {
-  \ 'colorscheme': 'PaperColor_light',
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ],
-  \ },
-  \ }
+    \ 'colorscheme': 'PaperColor_light',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ],
+    \ },
+    \ }
 
 "-----------------------------------------------------------
-" netrw
+" nerdtree
 "-----------------------------------------------------------
 
-let g:netrw_liststyle = 3
+let g:NERDTreeIgnore = []
+let g:NERDTreeIgnore += [ '\.DS_Store$', '\.exe$', '\.o$', '\.pdf$', '\.swp$', ]
+let g:NERDTreeIgnore += [ '\.aux$', '\.dvi$', '\.fdb_latexmk', '\.fls$', '\.synctex.gz$' ]
+let g:NERDTreeIgnore += [ '\.cm[aiox]$' ]
+
+let g:NERDTreeBookmarksFile = $XDG_DATA_HOME . '/nerdtree/bookmarks'
 
 "-----------------------------------------------------------
-" key bindings
+" key remapping
 "-----------------------------------------------------------
 
-nnoremap zq :<C-u>q<CR>
 nnoremap <CR> :<C-u>w<CR>
 nnoremap <C-z> <Nop>
 nnoremap g[ :<C-u>tabprevious<CR>
@@ -103,7 +107,10 @@ nnoremap <Esc> :nohl<CR>
 
 nnoremap <Leader>x :e .<CR>
 nnoremap <Leader>D :bd<CR>
-nnoremap <Leader>T :<C-u>tabnew<CR>
 nnoremap <Leader>r :source $MYVIMRC<CR>
-nnoremap <Leader>E :tabe $MYVIMRC<CR>
-nnoremap <Space>b :BufExplorer<CR>
+nnoremap <Leader>z :BufExplorer<CR>
+
+cnoremap <C-a> <Home>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-e> <End>

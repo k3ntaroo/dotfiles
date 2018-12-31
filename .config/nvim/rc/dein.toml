@@ -8,8 +8,8 @@ repo = 'Shougo/dein.vim'
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 
-# [[plugins]]
-# repo = 'scrooloose/nerdtree'
+[[plugins]]
+repo = 'scrooloose/nerdtree'
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
@@ -17,11 +17,8 @@ repo = 'tpope/vim-fugitive'
 [[plugins]]
 repo = 'jlanzarotta/bufexplorer'
 
-[[plugins]]
-repo = 'tpope/vim-vinegar'
-
 # colorscheme
- 
+
 [[plugins]]
 repo = 'reedes/vim-colors-pencil'
 

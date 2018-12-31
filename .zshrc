@@ -1,18 +1,12 @@
 
 # path
-append_PATH() {
-    if ! [[ "$PATH" =~ (^|:)${1}($|:) ]]; then
-        export PATH=${PATH}:${1}
-    fi
-}
-
 prepend_PATH() {
     if ! [[ "$PATH" =~ (^|:)${1}($|:) ]]; then
         export PATH=${1}:${PATH}
     fi
 }
 
-## XDG Base Directory Specification
+# XDG Base Directory Specification
 export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_DATA_HOME="${HOME}/.local/share"
@@ -24,12 +18,8 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export TERM=tmux-256color
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}|<>'
-prepend_PATH "${HOME}/.local/bin"
 prepend_PATH "/usr/local/bin"
-
-setopt auto_pushd
-setopt pushd_ignore_dups
-zstyle ':completion:*:default' menu select=1
+prepend_PATH "${HOME}/.local/bin"
 
 # enable better auto-completion
 autoload -U compinit
@@ -64,12 +54,14 @@ else
 fi
 
 # rlwrap
-export RLWRAP_HOME="${XDG_DATA_HOME}/rlwrap"
+if which rlwrap > /dev/null; then
+    export RLWRAP_HOME="${XDG_DATA_HOME}/rlwrap"
+fi
 
 # [golang] GOPATH
 if which go > /dev/null; then
     export GOPATH=${HOME}/go
-    append_PATH ${GOPATH}/bin
+    prepend_PATH "${GOPATH}/bin"
 fi
 
 # [ruby] gem
@@ -81,41 +73,37 @@ export BUNDLE_USER_CONFIG="${XDG_CONFIG_HOME}"/bundle
 export BUNDLE_USER_CACHE="${XDG_CACHE_HOME}"/bundle
 export BUNDLE_USER_PLUGIN="${XDG_DATA_HOME}"/bundle
 
-# [ruby] rbenv
 if which rbenv > /dev/null; then
     eval "$(rbenv init -)"
 fi
 
-# [perl] plenv
-if which plenv > /dev/null; then
-    eval "$(plenv init - zsh)";
-fi
-
-# [python] pyenv
 if which pyenv > /dev/null; then
     eval "$(pyenv init -)"
 fi
 
-# [javascript] npm
-export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
+if which npm > /dev/null; then
+    export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
+fi
 
-# [ocaml] opam
-export OPAMROOT="${XDG_DATA_HOME}/opam"
 if which opam > /dev/null; then
+    export OPAMROOT="${XDG_DATA_HOME}/opam"
     . ${OPAMROOT}/opam-init/init.zsh > /dev/null 2> /dev/null || true
     eval `opam env`
 fi
 
-# [haskell] stack
-export STACK_ROOT="${XDG_DATA_HOME}"/stack
+if which stack > /dev/null; then
+    export STACK_ROOT="${XDG_DATA_HOME}"/stack
+fi
 
-# [rust] cargo
-export CARGO_HOME="${XDG_DATA_HOME}"/cargo
+if which cargo > /dev/null; then
+    export CARGO_HOME="${XDG_DATA_HOME}"/cargo
+fi
 
 # macOS
 if [ `uname` = 'Darwin' ]; then
+    # magic
     export __CF_USER_TEXT_ENCODING="0x$(printf %x $(id -u)):0x8000100:14"
-    ## copy function
+
     if which pbcopy > /dev/null; then
         copy () {
           cat $1 | pbcopy
@@ -126,13 +114,15 @@ if [ `uname` = 'Darwin' ]; then
     alias ls="LANG='ja_JP.UTF-8' ls -FG"
 
     alias sr='screenresolution'
+    alias ls="ls -FG"
     alias g++='g++-7 -std=c++14 -Wall'
+elif [ `uname` = 'Linux' ]; then
+    alias ls="ls -F --color=auto"
 fi
 
 # aliases
 alias gosh='rlwrap gosh'
 alias ocaml='rlwrap ocaml'
-alias sbcl='rlwrap sbcl'
 alias clang++='clang++ --std=c++14 -Wall'
 alias ghc='stack ghc --'
 alias ghci='stack ghci --'
