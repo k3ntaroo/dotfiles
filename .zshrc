@@ -32,8 +32,8 @@ zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' formats "%F{yellow}[%b]%f"
 precmd () { vcs_info }
 
-PROMPT="%F{cyan}%n@%m %~ \$vcs_info_msg_0_
-%F{cyan}λ%f "
+PROMPT="%F{cyan}%n@%m %~
+%F{cyan}λ %f"
 
 # history
 setopt hist_ignore_dups
@@ -87,7 +87,6 @@ fi
 
 if which opam > /dev/null; then
     export OPAMROOT="${XDG_DATA_HOME}/opam"
-    . ${OPAMROOT}/opam-init/init.zsh > /dev/null 2> /dev/null || true
     eval `opam env`
 fi
 
@@ -109,20 +108,13 @@ if [ `uname` = 'Darwin' ]; then
           cat $1 | pbcopy
         }
     fi
-
-    ## BSD ls
-    alias ls="LANG='ja_JP.UTF-8' ls -FG"
-
-    alias sr='screenresolution'
-    alias ls="ls -FG"
-    alias g++='g++-7 -std=c++14 -Wall'
+    alias ls='ls -FG'
 elif [ `uname` = 'Linux' ]; then
     alias ls="ls -F --color=auto"
 fi
 
 # aliases
 alias gosh='rlwrap gosh'
-alias ocaml='rlwrap ocaml'
 alias clang++='clang++ --std=c++14 -Wall'
 alias ghc='stack ghc --'
 alias ghci='stack ghci --'

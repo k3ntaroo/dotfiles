@@ -52,7 +52,7 @@ set incsearch
 " general
 set wildignore+=*.DS_Store,*.exe,*.o,*.out,*.pdf,*.swp
 " latex
-set wildignore+=*.aux,*.dvi,*.fdb_latexmk,*.fls,*.synctex.gz
+set wildignore+=*.aux,*.dvi,*.fdb_latexmk,*fls,*.toc,*.synctex,*.gz
 " ocaml
 set wildignore+=*.cm?,*.annot
 " haskell
@@ -68,7 +68,7 @@ colorscheme pencil
 highlight! Normal ctermbg=NONE
 highlight! Normal ctermfg=NONE
 
-highlight ExtraWhitespace ctermbg=magenta
+highlight ExtraWhitespace ctermbg=green
 match ExtraWhitespace /\s\+$/
 
 "-----------------------------------------------------------
@@ -83,15 +83,12 @@ let g:lightline = {
     \ }
 
 "-----------------------------------------------------------
-" nerdtree
+" nerd tree
 "-----------------------------------------------------------
 
-let g:NERDTreeIgnore = []
-let g:NERDTreeIgnore += [ '\.DS_Store$', '\.exe$', '\.o$', '\.pdf$', '\.swp$', ]
-let g:NERDTreeIgnore += [ '\.aux$', '\.dvi$', '\.fdb_latexmk', '\.fls$', '\.synctex.gz$' ]
-let g:NERDTreeIgnore += [ '\.cm[aiox]$' ]
-
-let g:NERDTreeBookmarksFile = $XDG_DATA_HOME . '/nerdtree/bookmarks'
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeRespectWildIgnore = 1
+let g:NERDTreeShowHidden = 1
 
 "-----------------------------------------------------------
 " key remapping
